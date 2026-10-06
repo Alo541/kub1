@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Палитры</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    font-family: Arial, sans-serif;
+    transition: background .2s;
+  }
+
+  .wrap {
+    display: flex;
+    align-items: flex-start;
+    gap: 70px;
+  }
+
+  .palette {
+    width: 42px;
+    padding: 4px;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background: #eee;
+  }
+
+  .color {
+    width: 32px;
+    height: 30px;
+    margin: 3px 0;
+    border: 1px solid #aaa;
+    cursor: pointer;
+    border-radius: 2px;
+  }
+
+  .figures {
+    display: grid;
+    grid-template-columns: repeat(3, 130px);
+    gap: 12px 10px;
+    padding-top: 5px;
+  }
+
+  .figure {
+    width: 130px;
+    height: 74px;
+    background: #3211df;
+    clip-path: polygon(25% 0, 75% 0, 100% 25%, 90% 100%,
+                       10% 100%, 0 25%);
+    transition: background .2s;
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- ПЕРВАЯ ПАЛИТРА: меняет цвет фигур -->
+  <div class="palette" id="figurePalette">
+    <div class="color" style="background:red" data-color="red"></div>
+    <div class="color" style="background:blue" data-color="blue"></div>
+    <div class="color" style="background:yellow" data-color="yellow"></div>
+    <div class="color" style="background:purple" data-color="purple"></div>
+    <div class="color" style="background:white" data-color="white"></div>
+  </div>
+
+  <div class="figures">
+    <div class="figure"></div>
+    <div class="figure"></div>
+    <div class="figure"></div>
+    <div class="figure"></div>
+    <div class="figure"></div>
+    <div class="figure"></div>
+  </div>
+
+  <!-- ВТОРАЯ ПАЛИТРА: меняет фон -->
+  <div class="palette" id="backgroundPalette">
+    <div class="color" style="background:red" data-color="red"></div>
+    <div class="color" style="background:blue" data-color="blue"></div>
+    <div class="color" style="background:yellow" data-color="yellow"></div>
+    <div class="color" style="background:purple" data-color="purple"></div>
+    <div class="color" style="background:white" data-color="white"></div>
+  </div>
+
+</div>
+
+<script>
+  // Первая палитра меняет цвет всех фигур
+  const figures = document.querySelectorAll('.figure');
+
+  document.querySelectorAll('#figurePalette .color').forEach(button => {
+    button.addEventListener('click', () => {
+      const color = button.dataset.color;
+      figures.forEach(figure => {
+        figure.style.backgroundColor = color;
+      });
+    });
+  });
+
+  // Вторая палитра меняет цвет фона
+  document.querySelectorAll('#backgroundPalette .color').forEach(button => {
+    button.addEventListener('click', () => {
+      document.body.style.backgroundColor = button.dataset.color;
+    });
+  });
+</script>
+
+</body>
+</html>
